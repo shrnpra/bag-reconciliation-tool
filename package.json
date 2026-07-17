@@ -6,14 +6,15 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "npm run build:client && npm run build:server",
-    "build:client": "cd packages/client && npm run build && cp -r dist ../server/dist/public",
-    "build:server": "cd packages/server && tsc -p tsconfig.build.json",
+    "build": "npm run build:server && npm run build:client && npm run copy:client",
+    "build:client": "npm run --prefix packages/client build",
+    "build:server": "npm run --prefix packages/server build",
+    "copy:client": "mkdir -p packages/server/dist/public && cp -r packages/client/dist/* packages/server/dist/public/",
     "start": "node packages/server/dist/server.js",
-    "dev:server": "cd packages/server && npm run dev",
-    "dev:client": "cd packages/client && npm run dev",
+    "dev:server": "npm run --prefix packages/server dev",
+    "dev:client": "npm run --prefix packages/client dev",
     "test": "npm run test --workspaces --if-present",
-    "test:server": "cd packages/server && npm test"
+    "test:server": "npm run --prefix packages/server test"
   },
   "engines": {
     "node": ">=18.0.0"
