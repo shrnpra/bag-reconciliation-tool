@@ -1,0 +1,21 @@
+{
+  "name": "bag-reconciliation-tool",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "cd packages/client && npm run build && cp -r dist ../server/dist/public",
+    "build:server": "cd packages/server && tsc -p tsconfig.build.json",
+    "start": "node packages/server/dist/server.js",
+    "dev:server": "cd packages/server && npm run dev",
+    "dev:client": "cd packages/client && npm run dev",
+    "test": "npm run test --workspaces --if-present",
+    "test:server": "cd packages/server && npm test"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
