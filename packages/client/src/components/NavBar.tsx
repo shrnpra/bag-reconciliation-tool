@@ -12,6 +12,7 @@ const DRIVER_LINKS: NavItem[] = [
   { label: 'Check-Out', to: '/checkout' },
   { label: 'Check-In', to: '/checkin' },
   { label: 'Scan Bags', to: '/bags/scan' },
+  { label: '📚 Training', to: '/training' },
 ]
 
 const MANAGER_LINKS: NavItem[] = [
@@ -24,6 +25,7 @@ const MANAGER_LINKS: NavItem[] = [
   { label: 'End of Day', to: '/dashboard/end-of-day' },
   { label: 'Manage Drivers', to: '/admin/drivers' },
   { label: 'Manage Stores', to: '/admin/stores' },
+  { label: '📚 Training', to: '/training' },
 ]
 
 export default function NavBar() {

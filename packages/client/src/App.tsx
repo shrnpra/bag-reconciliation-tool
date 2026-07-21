@@ -8,6 +8,7 @@ import CheckInForm from './pages/CheckInForm'
 import VisitHistory from './pages/VisitHistory'
 import InventoryView from './pages/InventoryView'
 import DiscrepancyList from './pages/DiscrepancyList'
+import TrainingPage from './pages/TrainingPage'
 import ReportView from './pages/ReportView'
 import DriversAdmin from './pages/DriversAdmin'
 import StoresAdmin from './pages/StoresAdmin'
@@ -50,6 +51,9 @@ function App() {
           <Route path="/dashboard/accountability" element={<RequireAuth requiredRole="MANAGER"><AccountabilityDashboard /></RequireAuth>} />
           <Route path="/dashboard/drivers/:id" element={<RequireAuth requiredRole="MANAGER"><DriverBagDetail /></RequireAuth>} />
           <Route path="/dashboard/end-of-day" element={<RequireAuth requiredRole="MANAGER"><EndOfDaySummary /></RequireAuth>} />
+
+          {/* Training — accessible to all authenticated users */}
+          <Route path="/training" element={<RequireAuth><TrainingPage /></RequireAuth>} />
 
           {/* Fallback */}
           <Route path="/" element={<Navigate to="/login" replace />} />
