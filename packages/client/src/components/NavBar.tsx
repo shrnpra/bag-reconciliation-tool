@@ -11,6 +11,7 @@ const DRIVER_LINKS: NavItem[] = [
   { label: 'Dashboard', to: '/dashboard' },
   { label: 'Check-Out', to: '/checkout' },
   { label: 'Check-In', to: '/checkin' },
+  { label: 'Scan Bags', to: '/bags/scan' },
 ]
 
 const MANAGER_LINKS: NavItem[] = [
@@ -18,6 +19,9 @@ const MANAGER_LINKS: NavItem[] = [
   { label: 'Inventory', to: '/inventory' },
   { label: 'Discrepancies', to: '/discrepancies' },
   { label: 'Reports', to: '/reports' },
+  { label: 'Register Bags', to: '/bags/register' },
+  { label: 'Accountability', to: '/dashboard/accountability' },
+  { label: 'End of Day', to: '/dashboard/end-of-day' },
   { label: 'Manage Drivers', to: '/admin/drivers' },
   { label: 'Manage Stores', to: '/admin/stores' },
 ]

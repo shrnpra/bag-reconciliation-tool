@@ -7,6 +7,8 @@ import { driversRouter } from './routes/driversRouter';
 import { storesRouter } from './routes/storesRouter';
 import { visitsRouter } from './routes/visitsRouter';
 import { discrepanciesRouter } from './routes/discrepanciesRouter';
+import { bagsRouter } from './routes/bagsRouter';
+import { dashboardRouter } from './routes/dashboardRouter';
 
 const app = express();
 
@@ -37,6 +39,10 @@ app.use('/api/visits', visitsRouter);
 
 // Discrepancy routes (Req 6.x)
 app.use('/api/discrepancies', discrepanciesRouter);
+
+// Bag tracking routes (bag-tracking-v2)
+app.use('/api/bags', bagsRouter);
+app.use('/api/dashboard', dashboardRouter);
 
 // ─── Static file serving (Vite build output) ──────────────────────────────────
 import path from 'path';

@@ -38,6 +38,18 @@ enum DiscrepancyStatus {
   RESOLVED
 }
 
+enum BagStatus {
+  AVAILABLE
+  ASSIGNED
+  LOST
+}
+
+enum Country {
+  UAE
+  SAUDI_ARABIA
+  EGYPT
+}
+
 // ─── Models ───────────────────────────────────────────────────────────────────
 
 model User {
@@ -65,6 +77,7 @@ model Driver {
   user          User          @relation(fields: [userId], references: [id])
   visits        Visit[]
   discrepancies Discrepancy[]
+  bagAssignments BagAssignment[]
 }
 
 model Store {
@@ -73,11 +86,14 @@ model Store {
   address      String // 1-200 chars
   status       RecordStatus @default(DRAFT)
   bagInventory Int          @default(0)
+  country      Country      @default(UAE)
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
 
   visits        Visit[]
   discrepancies Discrepancy[]
+  bags          Bag[]             @relation("CurrentStoreBags")
+  returnedAssignments BagAssignment[] @relation("ReturnStore")
 }
 
 model Visit {
@@ -125,4 +141,31 @@ model AuditLog {
 
   user  User   @relation(fields: [performedBy], references: [id])
   visit Visit? @relation(fields: [visitId], references: [id])
+}
+
+model Bag {
+  id             String        @id @default(cuid())
+  barcode        String        @unique
+  status         BagStatus     @default(AVAILABLE)
+  currentStoreId String
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  currentStore   Store         @relation("CurrentStoreBags", fields: [currentStoreId], references: [id])
+  assignments    BagAssignment[]
+}
+
+model BagAssignment {
+  id             String    @id @default(cuid())
+  bagId          String
+  driverId       String
+  pickupTime     DateTime  @default(now())
+  returnTime     DateTime?
+  returnStoreId  String?
+  orderReference String?
+  createdAt      DateTime  @default(now())
+
+  bag            Bag       @relation(fields: [bagId], references: [id])
+  driver         Driver    @relation(fields: [driverId], references: [id])
+  returnStore    Store?    @relation("ReturnStore", fields: [returnStoreId], references: [id])
 }

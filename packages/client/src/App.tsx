@@ -11,6 +11,12 @@ import DiscrepancyList from './pages/DiscrepancyList'
 import ReportView from './pages/ReportView'
 import DriversAdmin from './pages/DriversAdmin'
 import StoresAdmin from './pages/StoresAdmin'
+import BagScanPage from './pages/BagScanPage'
+import BagRegistrationPage from './pages/BagRegistrationPage'
+import BagHistoryPage from './pages/BagHistoryPage'
+import AccountabilityDashboard from './pages/AccountabilityDashboard'
+import DriverBagDetail from './pages/DriverBagDetail'
+import EndOfDaySummary from './pages/EndOfDaySummary'
 
 function App() {
   return (
@@ -34,6 +40,16 @@ function App() {
           <Route path="/reports" element={<RequireAuth requiredRole="MANAGER"><ReportView /></RequireAuth>} />
           <Route path="/admin/drivers" element={<RequireAuth requiredRole="MANAGER"><DriversAdmin /></RequireAuth>} />
           <Route path="/admin/stores" element={<RequireAuth requiredRole="MANAGER"><StoresAdmin /></RequireAuth>} />
+
+          {/* Bag tracking v2 — DRIVER */}
+          <Route path="/bags/scan" element={<RequireAuth requiredRole="DRIVER"><BagScanPage /></RequireAuth>} />
+
+          {/* Bag tracking v2 — MANAGER */}
+          <Route path="/bags/register" element={<RequireAuth requiredRole="MANAGER"><BagRegistrationPage /></RequireAuth>} />
+          <Route path="/bags/:barcode/history" element={<RequireAuth requiredRole="MANAGER"><BagHistoryPage /></RequireAuth>} />
+          <Route path="/dashboard/accountability" element={<RequireAuth requiredRole="MANAGER"><AccountabilityDashboard /></RequireAuth>} />
+          <Route path="/dashboard/drivers/:id" element={<RequireAuth requiredRole="MANAGER"><DriverBagDetail /></RequireAuth>} />
+          <Route path="/dashboard/end-of-day" element={<RequireAuth requiredRole="MANAGER"><EndOfDaySummary /></RequireAuth>} />
 
           {/* Fallback */}
           <Route path="/" element={<Navigate to="/login" replace />} />
